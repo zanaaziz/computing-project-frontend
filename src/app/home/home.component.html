@@ -1,0 +1,80 @@
+<div class="row my-3">
+	<div class="col-12">
+		<h1>Exercises</h1>
+	</div>
+</div>
+
+<div class="row justify-content-lg-start my-3">
+	<div class="col-6 col-lg-auto">
+		<mat-form-field appearance="outline" class="w-100">
+			<mat-label>AI Search</mat-label>
+			<input matInput (change)="onChange()" />
+			<mat-icon matSuffix>search</mat-icon>
+			<mat-icon matPrefix>auto_awesome</mat-icon>
+		</mat-form-field>
+	</div>
+
+	<div class="col-6 col-lg-auto">
+		<mat-form-field appearance="outline" class="w-100">
+			<mat-label>Category</mat-label>
+
+			<mat-select multiple (valueChange)="onChange()">
+				<mat-option>Power Lifting</mat-option>
+				<mat-option>Strength</mat-option>
+				<mat-option>Stretching</mat-option>
+				<mat-option>Cardio</mat-option>
+			</mat-select>
+
+			<mat-icon matPrefix>category</mat-icon>
+		</mat-form-field>
+	</div>
+
+	<div class="col-6 col-lg-auto">
+		<mat-form-field appearance="outline" class="w-100">
+			<mat-label>Level</mat-label>
+
+			<mat-select multiple (valueChange)="onChange()">
+				<mat-option>Beginner</mat-option>
+				<mat-option>Intermediate</mat-option>
+				<mat-option>Expert</mat-option>
+			</mat-select>
+
+			<mat-icon matPrefix>bolt</mat-icon>
+		</mat-form-field>
+	</div>
+
+	<div class="col-6 col-lg-auto">
+		<mat-form-field appearance="outline" class="w-100">
+			<mat-label>Force</mat-label>
+
+			<mat-select multiple (valueChange)="onChange()">
+				<mat-option>Static</mat-option>
+				<mat-option>Pull</mat-option>
+				<mat-option>Push</mat-option>
+			</mat-select>
+
+			<mat-icon matPrefix>compare_arrows</mat-icon>
+		</mat-form-field>
+	</div>
+</div>
+
+<div class="row exercise" *ngFor="let exercise of exercises; index as i">
+	<div class="col-12 col-md-3 pb-3">
+		<img [src]="'https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/' + exercise.images[0]" />
+	</div>
+
+	<div class="col-12 col-md-9">
+		<p class="fs-5 fw-bolder">{{ exercise.name }}</p>
+
+		<p class="instructions">
+			{{ exercise.instructions }}
+		</p>
+
+		<mat-chip-set>
+			<mat-chip>Category: {{ exercise.category | titlecase }}</mat-chip>
+			<mat-chip>Level: {{ exercise.level | titlecase }}</mat-chip>
+			<mat-chip>Force: {{ exercise.force | titlecase }}</mat-chip>
+			<mat-chip>Equipment: {{ exercise.equipment | titlecase }}</mat-chip>
+		</mat-chip-set>
+	</div>
+</div>

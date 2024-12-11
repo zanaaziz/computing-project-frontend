@@ -1,0 +1,63 @@
+<div class="row mb-1">
+	<div class="col-12">
+		<h1>Profile</h1>
+	</div>
+</div>
+
+<div class="row images mb-5">
+	<div class="col-3">
+		<img class="photo" src="https://avatars.githubusercontent.com/u/25265055?v=4" />
+	</div>
+
+	<div class="col-9">
+		<img class="cover" src="https://images.pexels.com/photos/949132/pexels-photo-949132.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" />
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-6">
+		<mat-form-field appearance="outline">
+			<mat-label>Name</mat-label>
+			<input matInput value="Zana Aziz" />
+		</mat-form-field>
+	</div>
+
+	<div class="col-6">
+		<mat-form-field appearance="outline">
+			<mat-label>Email</mat-label>
+			<input matInput type="email" value="x16326983@student.ncirl.ie" />
+		</mat-form-field>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-6">
+		<mat-form-field appearance="outline">
+			<mat-label>Phone</mat-label>
+			<input matInput type="text" value="085 123 4567" />
+		</mat-form-field>
+	</div>
+
+	<div class="col-6">
+		<mat-form-field appearance="outline">
+			<mat-label>Date of Birth</mat-label>
+			<input matInput [matDatepicker]="picker" [value]="date" />
+			<!-- <mat-hint>DD/MM/YYYY</mat-hint> -->
+			<mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+			<mat-datepicker #picker></mat-datepicker>
+		</mat-form-field>
+	</div>
+</div>
+
+<div class="row text-end">
+	<div class="col-12">
+		<a routerLink="./">Change Password</a>
+		<a routerLink="./" class="ms-3 delete">Delete Account</a>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-12">
+		<button mat-flat-button class="w-100">Save</button>
+	</div>
+</div>

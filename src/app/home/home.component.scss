@@ -1,0 +1,21 @@
+.exercise {
+	margin-bottom: 3rem;
+
+	img {
+		width: 100%;
+		border-radius: 16px;
+		height: 200px;
+		object-fit: cover;
+	}
+
+	.instructions {
+		font-size: 0.8rem;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}
+
+	.info {
+		margin-right: 1rem;
+	}
+}
