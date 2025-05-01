@@ -1,0 +1,43 @@
+<h2 mat-dialog-title *ngIf="data.show === 'followers'">{{ data.profile.followerCount }} Followers</h2>
+<h2 mat-dialog-title *ngIf="data.show === 'followings'">Following</h2>
+
+<button mat-icon-button class="close-button" (click)="onClose()">
+	<mat-icon>close</mat-icon>
+</button>
+
+<mat-dialog-content>
+	<div
+		class="mb-3 d-flex justify-content-between align-items-center"
+		*ngFor="let user of data.show === 'followers' ? data.followers : data.followings; index as i"
+	>
+		<div class="d-flex align-items-center">
+			<div class="avatar">
+				<div class="w-10 rounded-full">
+					<a routerLink="/profile/{{ user.userId }}" class="preserve" (click)="onClose()">
+						<img [src]="user.profilePhotoUrl || '/assets/images/placeholders/cover-placeholder.png'" />
+					</a>
+				</div>
+			</div>
+
+			<div class="d-inline ms-3 text-lg text-black">
+				<a routerLink="/profile/{{ user.userId }}" class="preserve" (click)="onClose()">
+					{{ user.name }}
+				</a>
+			</div>
+		</div>
+
+		<div
+			class="d-inline-block ms-3 text-lg text-black"
+			*ngIf="!isSelfFollowersLoading && selfFollowers && selfFollowings && user['userId'] !== authService.getUser()['userId']"
+		>
+			<button
+				mat-flat-button
+				[class.not-following-button]="!isUserIn(user, selfFollowings)"
+				(click)="isUserIn(user, selfFollowings) ? onUnFollow(user) : onFollow(user)"
+			>
+				<mat-icon>{{ isUserIn(user, selfFollowings) ? 'check' : 'add' }}</mat-icon>
+				{{ isUserIn(user, selfFollowings) ? 'Following' : 'Follow' }}
+			</button>
+		</div>
+	</div>
+</mat-dialog-content>

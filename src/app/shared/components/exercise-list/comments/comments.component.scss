@@ -1,0 +1,21 @@
+.input-field {
+	display: flex;
+	gap: 1rem;
+	width: 100%;
+
+	.mat-mdc-form-field {
+		flex: 1;
+		min-width: 0;
+	}
+
+	button {
+		flex-shrink: 0;
+		height: 59px;
+	}
+}
+
+.close-button {
+	position: absolute;
+	top: 15px;
+	right: 15px;
+}

@@ -1,0 +1,55 @@
+<div class="row mb-5" *ngIf="!this.list">
+	<div class="col-12">
+		<app-filters [aiResult]="aiResult"></app-filters>
+	</div>
+</div>
+
+<div class="row exercise mb-5" *ngFor="let exercise of exercises; index as i">
+	<div class="col-12 col-md-4 pb-3">
+		<app-images [images]="exercise.images"></app-images>
+	</div>
+
+	<div class="col-12 col-md-8">
+		<p class="fs-5 fw-bolder">{{ exercise.name | titlecase }}</p>
+		<p class="instructions">{{ exercise.instructions }}</p>
+
+		<mat-chip-set>
+			<mat-chip *ngIf="exercise.level">{{ exercise.level | titlecase }}</mat-chip>
+			<mat-chip *ngIf="exercise.muscle">{{ exercise.muscle | titlecase }}</mat-chip>
+			<mat-chip *ngIf="exercise.category">{{ exercise.category | titlecase }}</mat-chip>
+			<mat-chip *ngIf="exercise.mechanic">{{ exercise.mechanic | titlecase }}</mat-chip>
+			<mat-chip *ngIf="exercise.force">{{ exercise.force | titlecase }}</mat-chip>
+			<mat-chip *ngIf="exercise.equipment && exercise.equipment !== 'other'">{{ exercise.equipment | titlecase }}</mat-chip>
+		</mat-chip-set>
+
+		<div class="interactions mt-lg-2">
+			<button mat-button [class.color-inherit]="!exercise.isLiked" (click)="onLike(exercise)" [disabled]="!authService.isAuth()">
+				<i class="fa-solid fa-thumbs-up me-2"></i>
+
+				<span>{{ exercise.likeCount }} Likes</span>
+			</button>
+
+			<button mat-button class="color-inherit" (click)="onComment(exercise)">
+				<i class="fa-solid fa-comments me-2"></i>
+
+				<span>{{ exercise.commentCount }} Comments</span>
+			</button>
+
+			<button mat-button class="color-inherit" (click)="onAddToList(exercise)" *ngIf="authService.isAuth()">
+				<i class="fa-solid fa-square-plus me-2"></i>
+
+				<span>Add to List</span>
+			</button>
+
+			<button mat-button class="color-inherit" *ngIf="list && list['relationship'] === 'owned'" (click)="onRemoveExerciseFromList(exercise)">
+				<i class="fa-solid fa-square-minus me-2"></i>
+
+				<span>Remove from List</span>
+			</button>
+		</div>
+	</div>
+</div>
+
+<div class="w-100 text-center py-3" *ngIf="isLoading">
+	<div class="loading loading-dots loading-xl"></div>
+</div>

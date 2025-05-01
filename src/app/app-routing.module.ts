@@ -1,36 +1,27 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { ProfileComponent } from './profile/profile.component';
-import { HomeComponent } from './home/home.component';
-import { OtpConfirmComponent } from './otp-confirm/otp-confirm.component';
 
 const routes: Routes = [
+	{ path: 'exercises', loadChildren: () => import('./features/home/home.module').then((m) => m.HomeModule) },
+	{ path: 'auth/login', loadChildren: () => import('./features/login/login.module').then((m) => m.LoginModule) },
+	{ path: 'auth/register', loadChildren: () => import('./features/register/register.module').then((m) => m.RegisterModule) },
+	{ path: 'auth/otp-confirm', loadChildren: () => import('./features/otp-confirm/otp-confirm.module').then((m) => m.OtpConfirmModule) },
+	{ path: 'auth/forgot-password', loadChildren: () => import('./features/forgot-password/forgot-password.module').then((m) => m.ForgotPasswordModule) },
+	{ path: 'profile', loadChildren: () => import('./features/profile/profile.module').then((m) => m.ProfileModule) },
+	{ path: 'lists', loadChildren: () => import('./features/lists/lists.module').then((m) => m.ListsModule) },
 	{
 		path: '',
-		component: HomeComponent,
-	},
-	{
-		path: 'login',
-		component: LoginComponent,
-	},
-	{
-		path: 'register',
-		component: RegisterComponent,
-	},
-	{
-		path: 'profile',
-		component: ProfileComponent,
-	},
-	{
-		path: 'otp-confirm',
-		component: OtpConfirmComponent,
+		redirectTo: 'exercises',
+		pathMatch: 'full',
 	},
 ];
 
 @NgModule({
-	imports: [RouterModule.forRoot(routes)],
+	imports: [
+		RouterModule.forRoot(routes, {
+			scrollPositionRestoration: 'enabled',
+		}),
+	],
 	exports: [RouterModule],
 })
 export class AppRoutingModule {}

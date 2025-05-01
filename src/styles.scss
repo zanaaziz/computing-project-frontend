@@ -1,4 +1,9 @@
-@import 'bootstrap/dist/css/bootstrap.min.css';
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@import 'bootstrap/dist/css/bootstrap-grid.min.css';
+@import 'bootstrap/dist/css/bootstrap-utilities.min.css';
 
 html,
 body {
@@ -10,6 +15,11 @@ body {
 	font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 
-button {
+button:not(.mdc-icon-button) {
 	border-radius: 8px !important;
+}
+
+a.preserve {
+	color: inherit;
+	text-decoration: none;
 }

@@ -1,0 +1,107 @@
+<form [formGroup]="form">
+	<div class="row my-3">
+		<div class="col-12">
+			<mat-form-field appearance="fill">
+				<mat-label>AI search</mat-label>
+
+				<input formControlName="aiQuery" matInput placeholder="i.e. back and chest for beginners without weights" />
+
+				<mat-icon matPrefix style="color: rgb(0, 92, 187)">auto_awesome</mat-icon>
+
+				<button matSuffix mat-icon-button (click)="form.reset()" class="me-2">
+					<mat-icon>close</mat-icon>
+				</button>
+
+				<mat-hint>AI automatically applies all filters for you</mat-hint>
+			</mat-form-field>
+		</div>
+	</div>
+
+	<div class="row pt-2">
+		<div class="col-12">
+			<mat-accordion>
+				<mat-expansion-panel [expanded]="false">
+					<mat-expansion-panel-header>
+						<mat-panel-title>Filters</mat-panel-title>
+					</mat-expansion-panel-header>
+
+					<div class="row row-cols-auto justify-content-start my-3">
+						<div class="col">
+							<mat-form-field appearance="outline" class="w-100">
+								<mat-label>Name</mat-label>
+								<input formControlName="name" matInput />
+							</mat-form-field>
+						</div>
+
+						<div class="col">
+							<mat-form-field appearance="outline">
+								<mat-label>Category</mat-label>
+
+								<mat-select formControlName="category" multiple>
+									<mat-option *ngFor="let option of categoryOptions; index as i" [value]="option">{{ option | titlecase }}</mat-option>
+								</mat-select>
+							</mat-form-field>
+						</div>
+
+						<div class="col">
+							<mat-form-field appearance="outline">
+								<mat-label>Muscle</mat-label>
+
+								<mat-select formControlName="muscle" multiple>
+									<mat-option *ngFor="let option of muscleOptions; index as i" [value]="option">{{ option | titlecase }}</mat-option>
+								</mat-select>
+							</mat-form-field>
+						</div>
+
+						<div class="col">
+							<mat-form-field appearance="outline">
+								<mat-label>Force</mat-label>
+
+								<mat-select formControlName="force" multiple>
+									<mat-option *ngFor="let option of forceOptions; index as i" [value]="option">{{ option | titlecase }}</mat-option>
+								</mat-select>
+							</mat-form-field>
+						</div>
+
+						<div class="col">
+							<mat-form-field appearance="outline">
+								<mat-label>Mechanic</mat-label>
+
+								<mat-select formControlName="mechanic" multiple>
+									<mat-option *ngFor="let option of mechanicOptions; index as i" [value]="option">{{ option | titlecase }}</mat-option>
+								</mat-select>
+							</mat-form-field>
+						</div>
+
+						<div class="col">
+							<mat-form-field appearance="outline">
+								<mat-label>Equipment</mat-label>
+
+								<mat-select formControlName="equipment" multiple>
+									<mat-option *ngFor="let option of equipmentOptions; index as i" [value]="option">{{ option | titlecase }}</mat-option>
+								</mat-select>
+							</mat-form-field>
+						</div>
+
+						<div class="col">
+							<mat-form-field appearance="outline">
+								<mat-label>Level</mat-label>
+
+								<mat-select formControlName="level" multiple>
+									<mat-option *ngFor="let option of levelOptions; index as i" [value]="option">{{ option | titlecase }}</mat-option>
+								</mat-select>
+							</mat-form-field>
+						</div>
+
+						<div class="col">
+							<button type="button" mat-button (click)="form.reset()" *ngIf="form.dirty" style="height: 56px">
+								<mat-icon matPrefix>close</mat-icon>
+								Clear
+							</button>
+						</div>
+					</div>
+				</mat-expansion-panel>
+			</mat-accordion>
+		</div>
+	</div>
+</form>

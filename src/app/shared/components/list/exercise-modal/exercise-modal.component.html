@@ -1,0 +1,9 @@
+<h2 mat-dialog-title>Exercises</h2>
+
+<button mat-icon-button class="close-button" (click)="onClose()">
+	<mat-icon>close</mat-icon>
+</button>
+
+<mat-dialog-content>
+	<app-exercise-list [list]="data.list"></app-exercise-list>
+</mat-dialog-content>

@@ -1,0 +1,44 @@
+<h2 mat-dialog-title>{{ data.exercise.commentCount }} Comments</h2>
+
+<button mat-icon-button class="close-button" (click)="onClose()">
+	<mat-icon>close</mat-icon>
+</button>
+
+<mat-dialog-content class="pt-0">
+	<div class="chat chat-start mb-3" *ngFor="let comment of comments; index as i">
+		<div class="chat-image avatar">
+			<div class="w-10 rounded-full">
+				<a routerLink="/profile/{{ comment.userId }}" class="preserve" (click)="onClose()">
+					<img [src]="comment.user.profilePhotoUrl || '/assets/images/placeholders/cover-placeholder.png'" />
+				</a>
+			</div>
+		</div>
+
+		<div class="chat-header">
+			<a routerLink="/profile/{{ comment.userId }}" class="preserve" (click)="onClose()">
+				{{ comment.user.name }}
+			</a>
+			<span>&middot;</span>
+			<time class="opacity-50" style="font-size: 0.6875rem">{{ momentService.ago(comment.createdAt) }}</time>
+		</div>
+
+		<div class="chat-bubble">{{ comment.content }}</div>
+	</div>
+
+	<div class="w-100 text-center py-3" *ngIf="isLoading">
+		<div class="loading loading-dots loading-xl"></div>
+	</div>
+</mat-dialog-content>
+
+<mat-dialog-actions [align]="'start'">
+	<div class="input-field">
+		<mat-form-field appearance="outline" hideRequiredMarker>
+			<input matInput [formControl]="input" type="text" placeholder="Leave a comment..." />
+		</mat-form-field>
+
+		<button mat-button [disabled]="isCommenting || !authService.isAuth()" (click)="onComment()">
+			<i class="fa-solid fa-paper-plane me-1"></i>
+			Post
+		</button>
+	</div>
+</mat-dialog-actions>

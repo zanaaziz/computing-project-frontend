@@ -1,0 +1,18 @@
+<h2 mat-dialog-title>Delete Account</h2>
+
+<form [formGroup]="confirmationForm" (ngSubmit)="onSubmit()">
+	<mat-dialog-content>
+		<p>Are you sure? Please enter your email to confirm your action.</p>
+
+		<mat-form-field appearance="outline" hideRequiredMarker>
+			<mat-label>Email</mat-label>
+			<input matInput formControlName="email" type="email" email />
+			<mat-hint>This action cannot be undone</mat-hint>
+			<mat-error *ngIf="errorMessage">{{ errorMessage }}</mat-error>
+		</mat-form-field>
+	</mat-dialog-content>
+
+	<mat-dialog-actions [align]="'start'">
+		<button mat-flat-button class="w-100 mt-3 delete-btn" type="submit" [disabled]="isLoading">Delete Account</button>
+	</mat-dialog-actions>
+</form>

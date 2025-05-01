@@ -1,0 +1,110 @@
+<div class="w-100 text-center py-3" *ngIf="isLoading">
+	<div class="loading loading-dots loading-xl"></div>
+</div>
+
+<ng-container *ngIf="isUserNotFound">
+	<div class="row mb-1">
+		<div class="col-12 text-center">
+			<i class="fa-solid fa-magnifying-glass text-9xl"></i>
+			<h1 class="text-4xl font-sans fw-bold">User not found</h1>
+		</div>
+	</div>
+</ng-container>
+
+<ng-container *ngIf="profile">
+	<div class="row mb-1">
+		<div class="col-12">
+			<div *ngIf="!isEditingName">
+				<h1 class="text-4xl font-sans fw-bold d-inline align-middle">{{profile?.['name']}}</h1>
+
+				<button mat-icon-button class="align-middle ms-3" (click)="isEditingName = true" *ngIf="isSelfProfile">
+					<mat-icon>edit</mat-icon>
+				</button>
+			</div>
+
+			<div *ngIf="isEditingName">
+				<input type="text" class="input input-xl text-4xl fw-bold" [(ngModel)]="editedName" />
+
+				<button mat-icon-button class="align-middle ms-3" (click)="onUpdateName()">
+					<mat-icon>check_circle</mat-icon>
+				</button>
+
+				<button mat-icon-button class="align-middle" (click)="onCancelEditName()">
+					<mat-icon>close</mat-icon>
+				</button>
+			</div>
+		</div>
+	</div>
+
+	<div class="row images mb-5">
+		<div class="col-3 position-relative">
+			<img class="photo" [src]="profile?.['profilePhotoUrl'] || '/assets/images/placeholders/profile-placeholder.png'" />
+
+			<button mat-icon-button class="edit-image" (click)="onEditProfilePhoto()" *ngIf="isSelfProfile">
+				<mat-icon>edit</mat-icon>
+			</button>
+
+			<input type="file" accept="image/jpeg,image/png,image/webp" #profilePhotoInput class="d-none" (change)="onProfilePhotoSelected($event)" />
+		</div>
+
+		<div class="col-9 position-relative">
+			<img class="cover" [src]="profile?.['coverPhotoUrl'] || '/assets/images/placeholders/cover-placeholder.png'" />
+
+			<button mat-icon-button class="edit-image" (click)="onEditCoverPhoto()" *ngIf="isSelfProfile">
+				<mat-icon>edit</mat-icon>
+			</button>
+
+			<input type="file" accept="image/jpeg,image/png,image/webp" #coverPhotoInput class="d-none" (change)="onCoverPhotoSelected($event)" />
+		</div>
+	</div>
+
+	<div class="row" *ngIf="isSelfProfile">
+		<div class="col-12">
+			<button mat-button (click)="onChangeEmail()">
+				<mat-icon>mail</mat-icon>
+				Change Email
+			</button>
+
+			<button mat-button (click)="onChangePassword()">
+				<mat-icon>password</mat-icon>
+				Change Password
+			</button>
+
+			<button mat-button class="delete" (click)="onDeleteAccount()">
+				<mat-icon>delete</mat-icon>
+				Delete Account
+			</button>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-12">
+			<button
+				mat-flat-button
+				class="me-3"
+				[class.not-following-button]="!isFollowing && !isSelfProfile"
+				(click)="isFollowing ? onUnfollow() : onFollow()"
+				[disabled]="isSelfProfile"
+			>
+				<mat-icon>{{ isFollowing ? 'check' : 'add' }}</mat-icon>
+				{{ isFollowing ? 'Following' : 'Follow' }}
+			</button>
+
+			<span (click)="onShowFollowers()" class="align-middle" [class.follower-count]="profile?.['followerCount'] > 0">
+				{{profile?.['followerCount'] | number}} Followers
+			</span>
+
+			<span class="align-middle mx-1 text-gray-400">&middot;</span>
+
+			<span (click)="onShowFollowings()" class="align-middle" [class.follower-count]="followings?.length > 0">
+				Following {{ followings.length ?? 0 | number }}
+			</span>
+		</div>
+	</div>
+
+	<div class="row" *ngIf="lists && lists.length > 0">
+		<div class="col-12">
+			<app-list [lists]="lists"></app-list>
+		</div>
+	</div>
+</ng-container>

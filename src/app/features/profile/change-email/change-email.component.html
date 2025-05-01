@@ -1,0 +1,33 @@
+<h2 mat-dialog-title>Change Email</h2>
+
+<mat-dialog-content>
+	<div *ngIf="step === 1">
+		<form [formGroup]="newEmailForm" (ngSubmit)="onSubmitNewEmail()" class="py-3">
+			<mat-form-field appearance="outline" hideRequiredMarker>
+				<mat-label>Current Email</mat-label>
+				<input matInput disabled [value]="data.profile.email" />
+			</mat-form-field>
+
+			<mat-form-field appearance="outline" hideRequiredMarker>
+				<mat-label>New Email</mat-label>
+				<input matInput formControlName="newEmail" />
+
+				<mat-error *ngIf="newEmailForm.get('newEmail')?.hasError('email')">Invalid email format</mat-error>
+			</mat-form-field>
+
+			<button mat-flat-button class="w-100 mt-3" color="primary" type="submit" [disabled]="isLoading">Continue</button>
+		</form>
+	</div>
+
+	<div *ngIf="step === 2">
+		<p>Please enter the verification code sent to your new email.</p>
+		<form [formGroup]="otpForm" (ngSubmit)="onSubmitOtp()">
+			<mat-form-field appearance="outline" hideRequiredMarker>
+				<input matInput formControlName="otp" placeholder="123456" />
+			</mat-form-field>
+
+			<button mat-flat-button class="w-100 mt-3" color="primary" type="submit" [disabled]="isLoading">Confirm New Email</button>
+			<button [disabled]="isLoading || !canResend" mat-button class="w-100 mt-3" type="button" (click)="onResendCode()">Resend Code</button>
+		</form>
+	</div>
+</mat-dialog-content>

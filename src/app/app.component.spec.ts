@@ -1,35 +1,31 @@
-import { TestBed } from '@angular/core/testing';
-import { RouterModule } from '@angular/router';
+import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('AppComponent', () => {
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [
-        RouterModule.forRoot([])
-      ],
-      declarations: [
-        AppComponent
-      ],
-    }).compileComponents();
-  });
+	let component: AppComponent;
+	let fixture: ComponentFixture<AppComponent>;
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
-  });
+	beforeEach(async () => {
+		await TestBed.configureTestingModule({
+			declarations: [AppComponent],
+			schemas: [NO_ERRORS_SCHEMA],
+		}).compileComponents();
+	});
 
-  it(`should have as title 'computing-project-frontend'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('computing-project-frontend');
-  });
+	beforeEach(() => {
+		fixture = TestBed.createComponent(AppComponent);
+		component = fixture.componentInstance;
+		fixture.detectChanges();
+	});
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, computing-project-frontend');
-  });
+	it('should create the app', () => {
+		expect(component).toBeTruthy();
+	});
+
+	it('should render header and footer', () => {
+		const compiled = fixture.nativeElement;
+		expect(compiled.querySelector('app-header')).toBeTruthy();
+		expect(compiled.querySelector('app-footer')).toBeTruthy();
+	});
 });

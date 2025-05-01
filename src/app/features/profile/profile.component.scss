@@ -1,0 +1,54 @@
+.row {
+	margin: 1.5rem auto;
+}
+
+.mat-mdc-form-field {
+	width: 100%;
+}
+
+.images {
+	height: 160px;
+
+	.photo {
+		width: 160px;
+		height: 160px;
+		border-radius: 90px;
+		object-fit: cover;
+	}
+
+	.cover {
+		width: 100%;
+		height: 160px;
+		border-radius: 16px;
+		object-fit: cover;
+	}
+}
+
+.delete {
+	color: #dc3545;
+}
+
+a {
+	text-decoration: none;
+}
+
+.edit-image {
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+	color: #005cbb;
+	background-color: #eaf1f9;
+}
+
+.not-following-button {
+	background-color: #eaf1f9;
+	color: #005cbb;
+}
+
+.follower-count {
+	color: #005cbb;
+}
+
+.follower-count:hover {
+	cursor: pointer;
+}

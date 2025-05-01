@@ -9,30 +9,44 @@
 	<div class="col-md">
 		<div class="row row-cols-auto justify-content-center justify-content-md-end">
 			<div class="col">
-				<button mat-button routerLink="/" routerLinkActive="active">
-					<i class="fa-solid fa-house me-2"></i>
-					<span>Home</span>
-				</button>
-			</div>
-
-			<div class="col">
-				<button mat-button routerLink="/login" routerLinkActive="active">
-					<i class="fa-solid fa-right-to-bracket me-2"></i>
-					<span>Login / Register</span>
+				<button mat-button routerLink="/exercises" routerLinkActive="active">
+					<i class="fa-solid fa-dumbbell me-2"></i>
+					<span>Exercises</span>
 				</button>
 			</div>
 
 			<!-- <div class="col">
-				<button mat-button routerLink="/register" routerLinkActive="active">
-					<i class="fa-solid fa-user-plus me-2"></i>
-					<span>Register</span>
+				<button mat-button routerLink="/lists" routerLinkActive="active">
+					<i class="fa-solid fa-users me-2"></i>
+					<span>Community Workouts</span>
 				</button>
 			</div> -->
 
-			<div class="col">
+			<div class="col" *ngIf="!authService.isAuth()">
+				<button mat-button routerLink="/auth/login" routerLinkActive="active">
+					<i class="fa-solid fa-right-to-bracket me-2"></i>
+					<span>Login</span>
+				</button>
+			</div>
+
+			<div class="col" *ngIf="!authService.isAuth()">
+				<button mat-button routerLink="/auth/register" routerLinkActive="active">
+					<i class="fa-solid fa-user-plus me-2"></i>
+					<span>Register</span>
+				</button>
+			</div>
+
+			<div class="col" *ngIf="authService.isAuth()">
 				<button mat-button routerLink="/profile" routerLinkActive="active">
 					<i class="fa-solid fa-user me-2"></i>
 					<span>Profile</span>
+				</button>
+			</div>
+
+			<div class="col" *ngIf="authService.isAuth()">
+				<button mat-button (click)="onLogout()">
+					<i class="fa-solid fa-right-to-bracket me-2"></i>
+					<span>Logout</span>
 				</button>
 			</div>
 		</div>
